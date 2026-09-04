@@ -1,0 +1,132 @@
+@import "tailwindcss";
+
+@theme {
+  --font-mono: 'JetBrains Mono', 'Space Mono', monospace;
+  --font-sans: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, sans-serif;
+  --color-zenith-bg: #0a0b0d;
+  --color-zenith-purple: #6e557d;
+  --color-zenith-purple-hover: #7c608c;
+  --color-zenith-badge: #17191e;
+}
+
+@keyframes subtleFloat {
+  0%, 100% { transform: translateX(-24px); }
+  50% { transform: translateX(24px); }
+}
+.animate-subtle-float { animation: subtleFloat 6s ease-in-out infinite; }
+.animate-subtle-float-delay-1 { animation: subtleFloat 7s ease-in-out 1s infinite; }
+.animate-subtle-float-delay-2 { animation: subtleFloat 6.5s ease-in-out 2s infinite; }
+
+/* Pkap Analyzer is intentionally scoped so the host SHAKTII site keeps its existing design. */
+.pkap-root {
+  --bg-base: #0a0b0d;
+  --bg-panel: #111318;
+  --bg-active: #17191e;
+  --bg-hover: #1c1f24;
+  --border-subtle: rgba(255,255,255,0.07);
+  --border-active: rgba(255,255,255,0.14);
+  --text-main: #eef0f3;
+  --text-secondary: #a3a8b2;
+  --text-muted: #626a76;
+  --accent-primary: #6e557d;
+  --accent-dim: rgba(110,85,125,0.15);
+  --sev-critical: #ef4444;
+  --sev-high: #f97316;
+  --sev-medium: #f59e0b;
+  --sev-low: #3b82f6;
+  --sev-info: #71717a;
+  --sev-critical-dim: rgba(239,68,68,0.12);
+  --sev-high-dim: rgba(249,115,22,0.12);
+  --sev-medium-dim: rgba(245,158,11,0.12);
+  --sev-low-dim: rgba(59,130,246,0.12);
+  --sev-info-dim: rgba(113,113,122,0.12);
+  color: var(--text-main);
+}
+
+.pkap-root.pkap-light {
+  --bg-base: #e9e8eb;
+  --bg-panel: #f7f6f8;
+  --bg-active: #efedf1;
+  --bg-hover: #e3e0e6;
+  --border-subtle: rgba(18,20,24,0.11);
+  --border-active: rgba(18,20,24,0.2);
+  --text-main: #17191e;
+  --text-secondary: #424751;
+  --text-muted: #6a707b;
+  background: #e9e8eb !important;
+  color: #17191e !important;
+}
+.pkap-root.pkap-light > div.fixed { opacity: 0.08; }
+
+.pkap-root h1, .pkap-root h2, .pkap-root h3, .pkap-root h4 { color: var(--text-main); }
+.pkap-root .mono { font-family: var(--font-mono); }
+
+.pkap-root .panel {
+  background-color: rgba(23,25,30,0.62);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(255,255,255,0.07);
+  border-radius: 8px;
+  box-shadow: 0 8px 32px rgba(0,0,0,0.18);
+  min-width: 0;
+}
+.pkap-root.pkap-light .panel { background: rgba(255,255,255,0.82); border-color: rgba(0,0,0,0.08); }
+
+.pkap-root .panel-header { padding: 1.1rem 1.25rem; border-bottom: 1px solid rgba(255,255,255,0.06); }
+.pkap-root.pkap-light .panel-header { border-bottom-color: rgba(0,0,0,0.07); }
+.pkap-root .panel-title { font-size: 0.78rem; text-transform: uppercase; letter-spacing: 0.08em; color: var(--text-secondary); }
+.pkap-root .panel-body { padding: 1.25rem; min-width: 0; }
+
+.pkap-root .btn {
+  display: inline-flex; align-items: center; justify-content: center; gap: .5rem;
+  padding: .52rem .9rem; border-radius: 5px; font-size: .72rem; font-weight: 600;
+  cursor: pointer; transition: all .2s; border: 1px solid transparent;
+}
+.pkap-root .btn-primary { background: #6e557d; border-color: rgba(255,255,255,0.08); color: #fff; }
+.pkap-root .btn-primary:hover { background: #7c608c; }
+.pkap-root .btn-outline { background: rgba(255,255,255,0.025); border-color: var(--border-active); color: var(--text-main); }
+.pkap-root .btn-outline:hover { background: rgba(255,255,255,0.06); border-color: rgba(255,255,255,0.24); }
+
+.pkap-root .badge { display: inline-flex; align-items: center; padding: .16rem .5rem; border-radius: 3px; font-size: .68rem; font-weight: 700; text-transform: uppercase; letter-spacing: .05em; }
+.pkap-root .grid-severity-cards { display: grid; grid-template-columns: repeat(auto-fit,minmax(135px,1fr)); gap: .8rem; }
+.pkap-root .severity-card { background: rgba(23,25,30,.52); border: 1px solid rgba(255,255,255,.06); padding: 1rem; border-radius: 7px; display:flex; flex-direction:column; gap:.4rem; position:relative; overflow:hidden; min-width:0; }
+.pkap-root .severity-card::before { content:''; position:absolute; top:0; left:0; right:0; height:3px; background:var(--sev-color); }
+.pkap-root .severity-card-title { font-size:.68rem; text-transform:uppercase; font-weight:600; color:var(--text-secondary); letter-spacing:.06em; }
+.pkap-root .severity-card-value { font-size:1.55rem; font-weight:700; font-family:var(--font-mono); }
+
+.pkap-root .text-critical { color: var(--sev-critical); }
+.pkap-root .text-high { color: var(--sev-high); }
+.pkap-root .text-medium { color: var(--sev-medium); }
+.pkap-root .text-low { color: var(--sev-low); }
+.pkap-root .text-info { color: var(--sev-info); }
+.pkap-root .text-muted { color: var(--text-muted); }
+.pkap-root .text-secondary { color: var(--text-secondary); }
+.pkap-root .bg-critical-dim { background: var(--sev-critical-dim); }
+.pkap-root .bg-high-dim { background: var(--sev-high-dim); }
+.pkap-root .bg-medium-dim { background: var(--sev-medium-dim); }
+.pkap-root .bg-low-dim { background: var(--sev-low-dim); }
+.pkap-root .bg-info-dim { background: var(--sev-info-dim); }
+.pkap-root .bg-surface-active { background: var(--bg-active); }
+.pkap-root .bg-surface-hover { background: var(--bg-hover); }
+
+@keyframes pkapFadeIn { from { opacity:0; transform: translateY(5px); } to { opacity:1; transform:translateY(0); } }
+.pkap-root .animate-fade-in { animation: pkapFadeIn .3s ease-out forwards; }
+
+.pkap-root table { max-width: 100%; }
+.pkap-root .recharts-responsive-container { min-width: 0 !important; max-width: 100% !important; }
+.pkap-root svg.recharts-surface { max-width: 100%; overflow: visible; }
+
+/* Critical overflow protection: graphs/cards remain inside the workspace rather than stretching to viewport width. */
+.pkap-root main, .pkap-root section, .pkap-root article, .pkap-root aside, .pkap-root .panel, .pkap-root .panel-body { min-width: 0; max-width: 100%; }
+.pkap-root img, .pkap-root canvas, .pkap-root svg { max-width: 100%; }
+
+@media (max-width: 720px) {
+  .pkap-root .panel-header, .pkap-root .panel-body { padding: .9rem; }
+  .pkap-root .grid-severity-cards { grid-template-columns: repeat(2,minmax(0,1fr)); }
+}
+
+@media print {
+  .pkap-root .print-hidden { display: none !important; }
+  .pkap-root { background: #fff !important; color: #111 !important; }
+  .pkap-root .panel { border-color: #ddd !important; background: #fff !important; box-shadow: none !important; }
+}
