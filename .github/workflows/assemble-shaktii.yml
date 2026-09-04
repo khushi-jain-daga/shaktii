@@ -1,0 +1,55 @@
+name: Assemble full SHAKTII project
+
+on:
+  push:
+    branches: [main]
+    paths:
+      - '.github/workflows/assemble-shaktii.yml'
+      - '.bootstrap/pkap-overlay.tar.gz'
+
+permissions:
+  contents: write
+
+jobs:
+  assemble:
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+        with:
+          fetch-depth: 0
+
+      - name: Preserve SHAKTII README
+        run: cp README.md /tmp/SHAKTII-README.md
+
+      - name: Pull original SIH26 frontend
+        run: |
+          git clone --depth 1 https://github.com/Purohitdev/SIH26.git /tmp/SIH26
+          rsync -a --delete --exclude='.git' --exclude='.github/' --exclude='.bootstrap/' /tmp/SIH26/ ./
+
+      - name: Apply final PKAP Analyzer integration
+        run: |
+          tar -xzf .bootstrap/pkap-overlay.tar.gz -C .
+          cp /tmp/SHAKTII-README.md README.md
+          rm -f pnpm-lock.yaml
+          node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json','utf8'));p.name='shaktii';fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n')"
+          cat > vercel.json <<'EOF'
+          {
+            "framework": "vite",
+            "buildCommand": "npm run build",
+            "outputDirectory": "dist"
+          }
+          EOF
+
+      - name: Install dependencies and verify production build
+        run: |
+          npm install
+          npm run build
+
+      - name: Commit complete project
+        run: |
+          rm -rf .bootstrap .github/workflows/assemble-shaktii.yml .github/workflows/bootstrap-shaktii.yml
+          git config user.name "github-actions[bot]"
+          git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
+          git add -A
+          git commit -m "feat: add full SHAKTII + PKAP Analyzer project"
+          git push origin main
