@@ -15,11 +15,16 @@ export default function Navbar({ activeNav, setActiveNav, onOpenDashboard, onOpe
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="h-[78px] w-full max-w-[1520px] mx-auto px-6 sm:px-12 flex items-center justify-between z-20 relative"
     >
-      <motion.a whileHover={{ scale: 1.02 }} href="#" className="flex items-center gap-3 text-white no-underline" aria-label="SHAKTII Home">
-        <div className="w-[27px] h-[27px] rounded-[6px] bg-white flex items-center justify-center relative shadow-[0_2px_6px_rgba(0,0,0,0.6)] shrink-0">
-          <div className="w-[17px] h-[10px] bg-[#0a0b0d] rounded-full -rotate-35 flex items-center justify-center relative"><div className="w-[3.5px] h-[3.5px] rounded-full bg-white absolute left-[3px] bottom-[2px]" /></div>
+      <motion.a whileHover={{ scale: 1.02 }} href="#" className="flex items-center gap-3 text-white no-underline" aria-label="PWN SHAKTI Home">
+        <img
+          src="/pwn-shakti-logo.svg"
+          alt="PWN SHAKTI"
+          className="w-[38px] h-[38px] rounded-[10px] object-cover border border-[#8b5cf6]/35 shadow-[0_0_18px_rgba(139,92,246,0.22)] shrink-0"
+        />
+        <div className="leading-none">
+          <span className="block font-sans font-semibold text-[1.25rem] tracking-[-0.01em] text-white">PWN SHAKTI</span>
+          <span className="hidden sm:block mt-1 font-mono text-[8.5px] tracking-[0.18em] uppercase text-[#8a909d]">AI Cyber Defense</span>
         </div>
-        <span className="font-sans font-semibold text-[1.35rem] tracking-[-0.01em] text-white">SHAKTII</span>
       </motion.a>
 
       <nav className="hidden md:flex items-center gap-5 absolute left-1/2 -translate-x-1/2" aria-label="Main Navigation">
