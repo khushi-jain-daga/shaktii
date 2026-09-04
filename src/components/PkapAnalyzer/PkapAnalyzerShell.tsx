@@ -1,5 +1,6 @@
 import { useEffect, useMemo, useState } from 'react';
 import { Activity, BookOpen, Database, FileText, Home, Settings, Shield, Upload } from 'lucide-react';
+import BrandLogo from '../common/BrandLogo';
 import UploadCenter from './UploadCenter';
 import ReportDashboard from './ReportDashboard';
 import HistoryPage from './HistoryPage';
@@ -186,13 +187,11 @@ export default function PkapAnalyzerShell({ onBack, onOpenDashboard }: Props) {
 
       <header className="relative z-30 border-b border-white/[0.06] bg-[#0a0b0d]/90 backdrop-blur-xl">
         <div className="h-[78px] max-w-[1520px] mx-auto px-4 sm:px-6 lg:px-12 flex items-center justify-between gap-4">
-          <div className="flex items-center gap-3 min-w-0">
-            <div className="w-[27px] h-[27px] rounded-[6px] bg-white flex items-center justify-center shrink-0">
-              <div className="w-[17px] h-[10px] bg-[#0a0b0d] rounded-full -rotate-35 relative"><div className="w-[3.5px] h-[3.5px] rounded-full bg-white absolute left-[3px] bottom-[2px]" /></div>
-            </div>
-            <div className="min-w-0">
-              <div className="font-sans font-semibold text-[1.15rem] sm:text-[1.3rem] truncate">SHAKTII <span className="text-[#8d6b9d]">/ PKAP ANALYZER</span></div>
-              <div className="hidden sm:block text-[9px] tracking-[0.15em] text-[#5f6673] mt-0.5">{pageTitle} // SECURITY ANALYSIS WORKSPACE</div>
+          <div className="flex items-center gap-4 min-w-0">
+            <BrandLogo heightClassName="h-9 sm:h-11" />
+            <div className="hidden md:block min-w-0 border-l border-white/10 pl-4">
+              <div className="font-sans font-semibold text-[1rem] text-[#8d6b9d] truncate">PKAP ANALYZER</div>
+              <div className="text-[9px] tracking-[0.15em] text-[#5f6673] mt-0.5">{pageTitle} // SECURITY ANALYSIS WORKSPACE</div>
             </div>
           </div>
           <div className="flex items-center gap-2 sm:gap-4 shrink-0">
