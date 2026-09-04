@@ -1,0 +1,49 @@
+<svg width="512" height="512" viewBox="0 0 512 512" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+  <title id="title">PWN Shakti Logo</title>
+  <desc id="desc">Cyber shield logo with circuit traces and predictive pulse signal.</desc>
+  <defs>
+    <linearGradient id="purple" x1="76" y1="108" x2="438" y2="438" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#D9B8FF"/>
+      <stop offset="0.45" stop-color="#8B5CF6"/>
+      <stop offset="1" stop-color="#6E557D"/>
+    </linearGradient>
+    <linearGradient id="silver" x1="112" y1="92" x2="394" y2="420" gradientUnits="userSpaceOnUse">
+      <stop offset="0" stop-color="#FFFFFF"/>
+      <stop offset="0.46" stop-color="#B8BCC7"/>
+      <stop offset="1" stop-color="#6B7280"/>
+    </linearGradient>
+    <filter id="glow" x="-25%" y="-25%" width="150%" height="150%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="4" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.31 0 0 0 0 1 0 0 0 0.65 0" result="glow"/>
+      <feMerge>
+        <feMergeNode in="glow"/>
+        <feMergeNode in="SourceGraphic"/>
+      </feMerge>
+    </filter>
+  </defs>
+
+  <rect width="512" height="512" rx="96" fill="#07080C"/>
+  <path d="M256 66C300 108 348 122 405 124V250C405 337 351 410 256 448C161 410 107 337 107 250V124C164 122 212 108 256 66Z" fill="#0F1117" stroke="url(#silver)" stroke-width="20"/>
+  <path d="M256 66C300 108 348 122 405 124V250C405 337 351 410 256 448V66Z" stroke="url(#purple)" stroke-width="20" stroke-linecap="round"/>
+
+  <g filter="url(#glow)" stroke="url(#purple)" stroke-width="10" stroke-linecap="round" stroke-linejoin="round">
+    <path d="M72 203H126L150 227H208L235 200"/>
+    <path d="M88 256H157L186 236H229"/>
+    <path d="M80 309H136L158 288H222"/>
+    <path d="M235 256H280L295 196L318 316L338 260H378"/>
+    <path d="M378 260H414" stroke-dasharray="2 18"/>
+  </g>
+
+  <g fill="#07080C" stroke="#B78CFF" stroke-width="8">
+    <circle cx="72" cy="203" r="13"/>
+    <circle cx="88" cy="256" r="13"/>
+    <circle cx="80" cy="309" r="13"/>
+    <circle cx="150" cy="227" r="13"/>
+    <circle cx="235" cy="200" r="13"/>
+  </g>
+
+  <path d="M425 238C439 250 439 270 425 282" stroke="#B78CFF" stroke-width="7" stroke-linecap="round" opacity="0.9"/>
+  <path d="M443 220C468 242 468 278 443 300" stroke="#B78CFF" stroke-width="6" stroke-linecap="round" opacity="0.55"/>
+
+  <text x="256" y="485" text-anchor="middle" font-family="Inter, Arial, sans-serif" font-size="42" font-weight="800" letter-spacing="4" fill="#F7F7FB">PWN SHAKTI</text>
+</svg>
