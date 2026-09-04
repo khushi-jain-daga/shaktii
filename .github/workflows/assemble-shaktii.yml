@@ -5,7 +5,7 @@ on:
     branches: [main]
     paths:
       - '.github/workflows/assemble-shaktii.yml'
-      - '.bootstrap/pkap-overlay.tar.gz'
+      - '.bootstrap/part-*'
 
 permissions:
   contents: write
@@ -26,9 +26,10 @@ jobs:
           git clone --depth 1 https://github.com/Purohitdev/SIH26.git /tmp/SIH26
           rsync -a --delete --exclude='.git' --exclude='.github/' --exclude='.bootstrap/' /tmp/SIH26/ ./
 
-      - name: Apply final PKAP Analyzer integration
+      - name: Reassemble and apply final PKAP Analyzer integration
         run: |
-          tar -xzf .bootstrap/pkap-overlay.tar.gz -C .
+          cat .bootstrap/part-00 .bootstrap/part-01 .bootstrap/part-02 .bootstrap/part-03 > /tmp/pkap-overlay.tar.gz
+          tar -xzf /tmp/pkap-overlay.tar.gz -C .
           cp /tmp/SHAKTII-README.md README.md
           rm -f pnpm-lock.yaml
           node -e "const fs=require('fs');const p=JSON.parse(fs.readFileSync('package.json','utf8'));p.name='shaktii';fs.writeFileSync('package.json',JSON.stringify(p,null,2)+'\n')"
@@ -47,7 +48,7 @@ jobs:
 
       - name: Commit complete project
         run: |
-          rm -rf .bootstrap .github/workflows/assemble-shaktii.yml .github/workflows/bootstrap-shaktii.yml
+          rm -rf .bootstrap .github/workflows/assemble-shaktii.yml
           git config user.name "github-actions[bot]"
           git config user.email "41898282+github-actions[bot]@users.noreply.github.com"
           git add -A
