@@ -1,26 +1,11 @@
 import { motion } from 'framer-motion';
+import BrandLogo from './common/BrandLogo';
 
 interface NavbarProps {
   activeNav: string;
   setActiveNav: (nav: string) => void;
   onOpenDashboard?: () => void;
   onOpenPkap?: () => void;
-}
-
-function ShaktiiLogo() {
-  return (
-    <div className="flex items-center gap-3">
-      <div className="w-[27px] h-[27px] rounded-[6px] bg-white flex items-center justify-center relative shadow-[0_2px_6px_rgba(0,0,0,0.6)] shrink-0">
-        <div className="w-[17px] h-[10px] bg-[#0a0b0d] rounded-full -rotate-35 flex items-center justify-center relative">
-          <div className="w-[3.5px] h-[3.5px] rounded-full bg-white absolute left-[3px] bottom-[2px]" />
-        </div>
-      </div>
-      <div className="leading-none">
-        <span className="block font-sans font-semibold text-[1.3rem] tracking-[-0.01em] text-white">SHAKTII</span>
-        <span className="hidden sm:block mt-1 font-mono text-[8.5px] tracking-[0.18em] uppercase text-[#8a909d]">AI Cyber Defense</span>
-      </div>
-    </div>
-  );
 }
 
 export default function Navbar({ activeNav, setActiveNav, onOpenDashboard, onOpenPkap }: NavbarProps) {
@@ -31,8 +16,8 @@ export default function Navbar({ activeNav, setActiveNav, onOpenDashboard, onOpe
       transition={{ duration: 0.6, ease: 'easeOut' }}
       className="h-[78px] w-full max-w-[1520px] mx-auto px-6 sm:px-12 flex items-center justify-between z-20 relative"
     >
-      <motion.a whileHover={{ scale: 1.02 }} href="#" className="flex items-center gap-3 text-white no-underline" aria-label="SHAKTII Home">
-        <ShaktiiLogo />
+      <motion.a whileHover={{ scale: 1.02 }} href="#" className="flex items-center text-white no-underline" aria-label="PWN SHAKTI Home">
+        <BrandLogo heightClassName="h-10 sm:h-12" />
       </motion.a>
 
       <nav className="hidden md:flex items-center gap-5 absolute left-1/2 -translate-x-1/2" aria-label="Main Navigation">
