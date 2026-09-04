@@ -1,5 +1,6 @@
 import { useState, useEffect } from 'react';
 import { motion } from 'framer-motion';
+import BrandLogo from '../common/BrandLogo';
 import NetworkGraph from './NetworkGraph';
 import TelemetryMetrics from './TelemetryMetrics';
 import EventLogs from './EventLogs';
@@ -31,17 +32,7 @@ export default function Dashboard({ onBack }: DashboardProps) {
       {/* Top Console Command Header */}
       <header className="h-[78px] w-full max-w-[1520px] mx-auto px-6 sm:px-12 flex items-center justify-between border-b border-white/[0.06] z-20 relative">
         <div className="flex items-center gap-6">
-          {/* Logo */}
-          <div className="flex items-center gap-3">
-            <div className="w-[27px] h-[27px] rounded-[6px] bg-white flex items-center justify-center relative shadow-[0_2px_6px_rgba(0,0,0,0.6)] shrink-0">
-              <div className="w-[17px] h-[10px] bg-[#0a0b0d] rounded-full -rotate-35 flex items-center justify-center relative">
-                <div className="w-[3.5px] h-[3.5px] rounded-full bg-white absolute left-[3px] bottom-[2px]" />
-              </div>
-            </div>
-            <div className="flex items-baseline gap-2">
-              <span className="font-sans font-semibold text-[1.3rem] text-white">SHAKTII</span>
-            </div>
-          </div>
+          <BrandLogo heightClassName="h-9 sm:h-11" />
         </div>
 
         {/* Right Actions: Time & Back Button */}
