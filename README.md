@@ -1,46 +1,124 @@
-# SHAKTII
+# SHAKTII – Autonomous Digital Defense Platform
 
-SHAKTII is a modern autonomous digital-defense interface with an integrated **PKAP Analyzer** workspace for security log analysis, incident reporting, threat intelligence, investigation, and response workflows.
+SHAKTII is an AI-powered cybersecurity interface with an integrated **PKAP Analyzer** workspace for raw log ingestion, threat detection, incident reporting, threat intelligence, investigation, and response workflows.
 
-## Highlights
+> Built for a professional assignment/demo workflow: clean Vite frontend, SHAKTII-native UI, serverless PKAP APIs, and Vercel-ready deployment.
 
-- SHAKTII landing experience and live security console
-- PKAP Analyzer upload center for `.log`, `.txt`, `.json`, and `.csv`
+## Live Demo
+
+```text
+https://shaktii.vercel.app
+```
+
+## Repository
+
+```text
+https://github.com/khushi-jain-daga/shaktii
+```
+
+## Key Modules
+
+- **SHAKTII Landing Page** – dark-grid product interface with security positioning.
+- **Live Security Dashboard** – operational telemetry and defense overview.
+- **PKAP Upload Center** – upload or paste `.log`, `.txt`, `.json`, and `.csv` data.
+- **Report Dashboard** – risk score, severity breakdown, findings, IOCs, and remediation.
+- **Reports History** – local report storage, reopen, and delete workflows.
+- **Threat Intelligence** – IOC search, enrichment cards, activity graph, and threat tables.
+- **Documentation** – product usage and workflow guidance inside the app.
+- **Settings** – local behavior, compliance, notifications, and cleanup preferences.
+- **Serverless APIs** – analysis, investigation, report generation, threat intel, and containment endpoints.
+
+## Feature Highlights
+
 - Client-side sensitive-data redaction before analysis
-- Security report dashboard with severity and event visualizations
-- Reports history with reopen/delete workflows
-- Threat-intelligence workspace with IOC search and responsive activity graphs
-- Finding investigation and remediation workflows
-- Documentation and settings pages
-- Vercel serverless APIs for analysis, investigation, report generation, threat intelligence, and containment
-- Optional AI and VirusTotal enrichment with local fallback behavior
+- Deterministic local fallback analysis
+- Optional AI enrichment flow for deeper investigation
+- VirusTotal-style threat-intelligence enrichment fallback
+- MITRE ATT&CK style tags and investigation context
+- IOC extraction from raw logs
+- Responsive report and threat-activity graphs
+- Markdown report export and sharing actions
+- Local containment/blocklist workflow placeholder
+- Vercel deployment support through `api/` serverless functions
 
-## Tech stack
+## Tech Stack
 
-- React 19
-- TypeScript
-- Vite
-- Tailwind CSS
-- Framer Motion
-- Recharts
-- Vercel Functions
+| Layer | Technology |
+| --- | --- |
+| Frontend | React 19, TypeScript, Vite |
+| Styling | Tailwind CSS, custom SHAKTII design system |
+| Motion | Framer Motion / Motion |
+| Charts | Recharts |
+| Icons | Lucide React |
+| APIs | Vercel Serverless Functions |
+| Deployment | Vercel |
 
-## Local development
+## Project Structure
+
+```text
+shaktii/
+├── api/                         # Vercel serverless API routes
+│   ├── pkap-analyze.js
+│   ├── pkap-block-ip.js
+│   ├── pkap-generate-report.js
+│   ├── pkap-investigate.js
+│   └── pkap-threat-intel.js
+│
+├── docs/                        # Technical and handoff documentation
+│   ├── API.md
+│   ├── ARCHITECTURE.md
+│   ├── FEATURES.md
+│   └── SETUP.md
+│
+├── public/
+│   └── screenshots/             # Add demo screenshots here
+│       └── README.md
+│
+├── src/
+│   ├── components/
+│   │   ├── Dashboard/           # SHAKTII live dashboard
+│   │   ├── PkapAnalyzer/        # PKAP Analyzer workspace pages
+│   │   ├── LandingPage.tsx
+│   │   └── Navbar.tsx
+│   │
+│   ├── utils/
+│   │   └── pkapAnalyzer.ts      # Local analysis, redaction, helpers
+│   │
+│   ├── App.tsx
+│   ├── index.css
+│   ├── main.tsx
+│   └── vite-env.d.ts
+│
+├── .env.example.pkap            # Example environment variables
+├── .gitignore
+├── package.json
+├── tsconfig.app.json
+├── tsconfig.json
+├── tsconfig.node.json
+├── vercel.json
+└── vite.config.ts
+```
+
+## Local Development
 
 ```bash
 npm install
 npm run dev
 ```
 
-Open the local URL printed by Vite, normally `http://localhost:5173`.
+Open the local URL printed by Vite, normally:
 
-## Production build
+```text
+http://localhost:5173
+```
+
+## Production Build
 
 ```bash
 npm run build
 ```
 
-## Environment variables
+## Environment Variables
 
 Copy the example file and add only the integrations you want to use:
 
@@ -48,31 +126,64 @@ Copy the example file and add only the integrations you want to use:
 cp .env.example.pkap .env
 ```
 
-Never commit real API keys. The application is designed to retain local/fallback analysis when optional external providers are unavailable.
+Never commit real API keys. The app can continue using local/fallback analysis when optional external providers are not configured.
 
-## Vercel deployment
+Example variables are documented in `.env.example.pkap`.
+
+## Vercel Deployment
 
 Import this repository into Vercel with:
 
-- **Framework Preset:** Vite
-- **Build Command:** `npm run build`
-- **Output Directory:** `dist`
+```text
+Framework Preset: Vite
+Build Command: npm run build
+Output Directory: dist
+```
 
 The `api/` directory is deployed as Vercel Functions alongside the frontend.
 
-## Main PKAP workspace
+## Suggested Screenshots
 
-1. **Upload Center** — ingest or paste raw logs and start analysis.
-2. **Report** — inspect risk, findings, IOCs, remediation, and visual summaries.
-3. **Reports History** — reopen and manage previous analyses.
-4. **Threat Intel** — investigate IOCs and review responsive threat visualizations.
-5. **Documentation** — product usage and workflow guidance.
-6. **Settings** — local behavior, compliance, notifications, and cleanup preferences.
+Add these screenshots under `public/screenshots/` before final submission:
 
-## Security note
+```text
+homepage.png
+pkap-upload.png
+report-dashboard.png
+threat-intel.png
+settings.png
+```
 
-Do not commit `.env` files, real credentials, production logs containing sensitive data, or private API keys to the repository.
+## Documentation
+
+- [Architecture](docs/ARCHITECTURE.md)
+- [Features](docs/FEATURES.md)
+- [Setup Guide](docs/SETUP.md)
+- [API Reference](docs/API.md)
+
+## Security Notes
+
+Do not commit:
+
+- `.env`
+- real API keys
+- private credentials
+- production logs containing sensitive data
+- personal tokens or secrets
+
+## Assignment Handoff
+
+For reviewers or teammates:
+
+```bash
+git clone https://github.com/khushi-jain-daga/shaktii.git
+cd shaktii
+npm install
+npm run dev
+```
+
+Then open the Vite local URL in the browser.
 
 ---
 
-Built as the SHAKTII + PKAP Analyzer security workspace.
+Built as the **SHAKTII + PKAP Analyzer** security workspace.
