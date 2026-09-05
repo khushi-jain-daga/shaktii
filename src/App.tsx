@@ -4,10 +4,13 @@ import LandingPage from './components/LandingPage';
 import Dashboard from './components/Dashboard/Dashboard';
 import PkapAnalyzerShell from './components/PkapAnalyzer/PkapAnalyzerShell';
 import AppShell from './components/AppShell';
-import ComingSoonPage from './pages/ComingSoonPage';
 import LoginPage from './pages/LoginPage';
 import FilesPage from './pages/FilesPage';
 import UploadPage from './pages/UploadPage';
+import BlockchainPage from './pages/BlockchainPage';
+import SecurityPage from './pages/SecurityPage';
+import AnalyticsPage from './pages/AnalyticsPage';
+import ActivityPage from './pages/ActivityPage';
 
 function PublicLanding() {
   return (
@@ -41,6 +44,7 @@ export default function App() {
           <Route path="/dashboard" element={<Dashboard onBack={() => { window.location.href = '/'; }} />} />
           <Route path="/files" element={<FilesPage />} />
           <Route path="/upload" element={<UploadPage />} />
+          <Route path="/blockchain" element={<BlockchainPage />} />
           <Route
             path="/pkap"
             element={
@@ -50,18 +54,9 @@ export default function App() {
               />
             }
           />
-          <Route
-            path="/security"
-            element={<ComingSoonPage title="Security Monitoring" description="Threat events, alerts, severity analysis and investigation workflows." />}
-          />
-          <Route
-            path="/analytics"
-            element={<ComingSoonPage title="Analytics" description="Dedicated operational, security and verification analytics powered by Node.js API endpoints." />}
-          />
-          <Route
-            path="/activity"
-            element={<ComingSoonPage title="Activity & Audit Logs" description="Searchable audit history for security actions, investigations, reports and operator activity." />}
-          />
+          <Route path="/security" element={<SecurityPage />} />
+          <Route path="/analytics" element={<AnalyticsPage />} />
+          <Route path="/activity" element={<ActivityPage />} />
         </Route>
         <Route path="*" element={<Navigate to="/" replace />} />
       </Routes>
