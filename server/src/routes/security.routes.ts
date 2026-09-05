@@ -46,7 +46,9 @@ securityRouter.post('/events', requireRole('ADMIN', 'SECURITY_ANALYST'), async (
 
 securityRouter.patch('/events/:id/resolve', requireRole('ADMIN', 'SECURITY_ANALYST'), async (req, res, next) => {
   try {
-    const event = await prisma.securityEvent.update({ where: { id: req.params.id }, data: { status: 'RESOLVED' } });
+    const id = Array.isArray(req.params.id) ? req.params.id[0] : req.params.id;
+    if (!id) return res.status(400).json({ success: false, code: 'INVALID_EVENT_ID', message: 'Security event id is required' });
+    const event = await prisma.securityEvent.update({ where: { id }, data: { status: 'RESOLVED' } });
     await prisma.auditLog.create({ data: { userId: req.user!.sub, action: 'SECURITY_EVENT_RESOLVE', resource: event.id, status: 'SUCCESS' } });
     res.json({ success: true, data: event });
   } catch (error) { next(error); }
