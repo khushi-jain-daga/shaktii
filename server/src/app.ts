@@ -5,6 +5,8 @@ import rateLimit from 'express-rate-limit';
 import { healthRouter } from './routes/health.routes.js';
 import { dashboardRouter } from './routes/dashboard.routes.js';
 import { legacyPkapRouter } from './routes/legacy-pkap.routes.js';
+import { authRouter } from './routes/auth.routes.js';
+import { filesRouter } from './routes/files.routes.js';
 
 export const app = express();
 
@@ -28,6 +30,8 @@ app.use(express.json({ limit: '2mb' }));
 app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 
 app.use('/api/health', healthRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/files', filesRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/pkap', legacyPkapRouter);
 
@@ -41,6 +45,9 @@ app.use((_req, res) => {
 
 app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error(error);
+  if (error instanceof Error && error.name === 'ZodError') {
+    return res.status(422).json({ success: false, code: 'VALIDATION_ERROR', message: 'Invalid request data' });
+  }
   res.status(500).json({
     success: false,
     code: 'INTERNAL_SERVER_ERROR',
