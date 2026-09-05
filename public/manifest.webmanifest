@@ -1,0 +1,36 @@
+{
+  "name": "PWN SHAKTI Incident Response",
+  "short_name": "PWN SHAKTI",
+  "description": "Edge router firmware monitoring and mobile incident response app for SHAKTII.",
+  "start_url": "/?source=pwa",
+  "scope": "/",
+  "display": "standalone",
+  "background_color": "#05060a",
+  "theme_color": "#6d28d9",
+  "orientation": "portrait-primary",
+  "categories": ["security", "productivity", "utilities"],
+  "icons": [
+    {
+      "src": "/pwn-shakti-main-logo.svg",
+      "sizes": "any",
+      "type": "image/svg+xml",
+      "purpose": "any maskable"
+    }
+  ],
+  "shortcuts": [
+    {
+      "name": "Incident Response",
+      "short_name": "Incidents",
+      "description": "Open the incident response workspace.",
+      "url": "/?view=response",
+      "icons": [{ "src": "/pwn-shakti-main-logo.svg", "sizes": "any", "type": "image/svg+xml" }]
+    },
+    {
+      "name": "PKAP Analyzer",
+      "short_name": "PKAP",
+      "description": "Open the packet/log analyzer workspace.",
+      "url": "/?view=pkap",
+      "icons": [{ "src": "/pwn-shakti-main-logo.svg", "sizes": "any", "type": "image/svg+xml" }]
+    }
+  ]
+}
