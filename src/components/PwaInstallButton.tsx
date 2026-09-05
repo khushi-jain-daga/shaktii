@@ -8,12 +8,21 @@ function isStandalone() {
 
 export default function PwaInstallButton() {
   const [promptEvent, setPromptEvent] = useState<InstallPromptEvent | null>(null);
-  const [installed, setInstalled] = useState(() => isStandalone() || window.localStorage.getItem('shaktii_installed') === '1');
+  const [installed, setInstalled] = useState(() => isStandalone());
 
   useEffect(() => {
+    if (isStandalone()) {
+      window.localStorage.setItem('shaktii_installed', '1');
+      setInstalled(true);
+    }
+
     const onPrompt = (event: Event) => {
       event.preventDefault();
-      if (!isStandalone()) setPromptEvent(event as InstallPromptEvent);
+      if (!isStandalone()) {
+        window.localStorage.removeItem('shaktii_installed');
+        setInstalled(false);
+        setPromptEvent(event as InstallPromptEvent);
+      }
     };
     const onInstalled = () => {
       window.localStorage.setItem('shaktii_installed', '1');
