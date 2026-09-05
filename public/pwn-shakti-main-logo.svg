@@ -1,59 +1,87 @@
-<svg width="980" height="260" viewBox="0 0 980 260" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
+<svg width="980" height="360" viewBox="0 0 980 360" fill="none" xmlns="http://www.w3.org/2000/svg" role="img" aria-labelledby="title desc">
   <title id="title">PWN SHAKTI</title>
-  <desc id="desc">PWN Shakti cyber defense logo with shield, circuit traces and predictive pulse.</desc>
+  <desc id="desc">Clean PWN Shakti cybersecurity logo with shield, circuit traces, pulse signal, and metallic typography.</desc>
   <defs>
-    <linearGradient id="pwnPurple" x1="40" y1="180" x2="430" y2="180" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#3511ff"/>
-      <stop offset="0.45" stop-color="#6b20ff"/>
-      <stop offset="1" stop-color="#8d35ff"/>
+    <radialGradient id="bg" cx="50%" cy="45%" r="70%">
+      <stop offset="0" stop-color="#14101f"/>
+      <stop offset="0.55" stop-color="#07080d"/>
+      <stop offset="1" stop-color="#020308"/>
+    </radialGradient>
+    <linearGradient id="purple" x1="170" y1="150" x2="740" y2="150" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#8a55ff"/>
+      <stop offset="0.45" stop-color="#b16cff"/>
+      <stop offset="1" stop-color="#5e22ff"/>
     </linearGradient>
-    <linearGradient id="shaktiSilver" x1="445" y1="180" x2="935" y2="180" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#f7f7fb"/>
-      <stop offset="0.45" stop-color="#aeb3bd"/>
-      <stop offset="1" stop-color="#f7f7fb"/>
+    <linearGradient id="silver" x1="360" y1="95" x2="595" y2="230" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.48" stop-color="#a5a9b2"/>
+      <stop offset="1" stop-color="#ffffff"/>
     </linearGradient>
-    <linearGradient id="shieldGrad" x1="355" y1="12" x2="620" y2="142" gradientUnits="userSpaceOnUse">
-      <stop stop-color="#d7d8de"/>
-      <stop offset="0.48" stop-color="#771cff"/>
-      <stop offset="1" stop-color="#4b13e9"/>
+    <linearGradient id="pwnText" x1="55" y1="278" x2="405" y2="278" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#cd86ff"/>
+      <stop offset="0.52" stop-color="#7b2fff"/>
+      <stop offset="1" stop-color="#cfa3ff"/>
     </linearGradient>
-    <filter id="glow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
-      <feGaussianBlur stdDeviation="2.4" result="blur"/>
-      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.34 0 0 0 0 0.12 0 0 0 0 1 0 0 0 0.65 0"/>
+    <linearGradient id="shaktiText" x1="430" y1="278" x2="930" y2="278" gradientUnits="userSpaceOnUse">
+      <stop stop-color="#ffffff"/>
+      <stop offset="0.35" stop-color="#90949d"/>
+      <stop offset="0.72" stop-color="#ffffff"/>
+      <stop offset="1" stop-color="#bfc3ca"/>
+    </linearGradient>
+    <filter id="softGlow" x="-20%" y="-20%" width="140%" height="140%" color-interpolation-filters="sRGB">
+      <feGaussianBlur stdDeviation="3" result="blur"/>
+      <feColorMatrix in="blur" type="matrix" values="0 0 0 0 0.55 0 0 0 0 0.18 0 0 0 0 1 0 0 0 0.65 0"/>
       <feMerge><feMergeNode/><feMergeNode in="SourceGraphic"/></feMerge>
     </filter>
-    <filter id="shadow" x="-10%" y="-10%" width="120%" height="120%">
-      <feDropShadow dx="0" dy="3" stdDeviation="3" flood-color="#000000" flood-opacity="0.45"/>
+    <filter id="typeShadow" x="-10%" y="-25%" width="120%" height="150%">
+      <feDropShadow dx="0" dy="5" stdDeviation="4" flood-color="#000" flood-opacity="0.55"/>
     </filter>
   </defs>
 
-  <g filter="url(#glow)">
-    <path d="M487 12C527 44 566 54 613 57V116C613 151 594 181 552 202C536 210 514 218 487 225C460 218 438 210 422 202C380 181 361 151 361 116V57C408 54 447 44 487 12Z" fill="#0b0c10" stroke="url(#shieldGrad)" stroke-width="7"/>
-    <path d="M487 12C527 44 566 54 613 57V116C613 151 594 181 552 202C536 210 514 218 487 225V12Z" stroke="#651aff" stroke-width="7" opacity="0.9"/>
-    <path d="M254 91H332L355 112H423L455 82" stroke="#4717ff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M230 123H338L370 102H442" stroke="#551cff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M274 153H350L378 132H445" stroke="#6628ff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-    <path d="M454 128H493L508 74L529 178L552 121H720" stroke="#651aff" stroke-width="7" stroke-linecap="round" stroke-linejoin="round"/>
-    <g fill="#5a1cff" stroke="#25105f" stroke-width="3">
-      <circle cx="254" cy="91" r="9"/><circle cx="230" cy="123" r="9"/><circle cx="274" cy="153" r="9"/>
-      <circle cx="332" cy="91" r="7"/><circle cx="338" cy="123" r="7"/><circle cx="350" cy="153" r="7"/>
+  <rect width="980" height="360" fill="url(#bg)"/>
+
+  <g filter="url(#softGlow)">
+    <path d="M490 42C528 75 568 84 612 88V143C612 192 564 232 490 254C416 232 368 192 368 143V88C412 84 452 75 490 42Z" fill="#07080d" stroke="url(#silver)" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M490 42C528 75 568 84 612 88V143C612 192 564 232 490 254V42Z" stroke="#8b35ff" stroke-width="8" stroke-linejoin="round"/>
+    <path d="M490 50V247" stroke="#484b55" stroke-width="3" opacity="0.65"/>
+
+    <path d="M214 124H266L298 154H362" stroke="url(#purple)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M170 154H278L304 175H396" stroke="url(#purple)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M130 185H300L330 166H402" stroke="url(#purple)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M188 218H292L326 194H396" stroke="url(#purple)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+    <path d="M240 244H282L310 220H388" stroke="url(#purple)" stroke-width="8" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g fill="#090a10" stroke="#aa6cff" stroke-width="6">
+      <circle cx="214" cy="124" r="9"/>
+      <circle cx="170" cy="154" r="9"/>
+      <circle cx="130" cy="185" r="9"/>
+      <circle cx="188" cy="218" r="9"/>
+      <circle cx="240" cy="244" r="9"/>
+      <circle cx="266" cy="124" r="8"/>
+      <circle cx="278" cy="154" r="8"/>
+      <circle cx="300" cy="185" r="8"/>
+      <circle cx="292" cy="218" r="8"/>
+      <circle cx="326" cy="194" r="8"/>
     </g>
-    <g fill="#8c8f98" stroke="#d8d9df" stroke-width="2">
-      <circle cx="389" cy="63" r="8"/><circle cx="389" cy="82" r="8"/><circle cx="396" cy="160" r="8"/>
-    </g>
-    <g fill="#5d19f7" opacity="0.8">
-      <rect x="728" y="110" width="12" height="12" rx="3"/><rect x="744" y="110" width="12" height="12" rx="3"/><rect x="760" y="110" width="12" height="12" rx="3"/>
-      <rect x="776" y="116" width="12" height="12" rx="3"/><rect x="792" y="119" width="10" height="10" rx="3"/><rect x="806" y="123" width="8" height="8" rx="2"/>
-      <rect x="728" y="130" width="12" height="12" rx="3"/><rect x="744" y="130" width="12" height="12" rx="3"/><rect x="760" y="130" width="12" height="12" rx="3"/>
-      <rect x="776" y="134" width="12" height="12" rx="3"/><rect x="792" y="137" width="10" height="10" rx="3"/><rect x="806" y="140" width="8" height="8" rx="2"/>
+
+    <path d="M432 183H504L520 111L548 238L568 178L588 205H702" stroke="#b875ff" stroke-width="9" stroke-linecap="round" stroke-linejoin="round"/>
+
+    <g fill="#9b59ff">
+      <rect x="722" y="176" width="10" height="10" rx="2"/>
+      <rect x="748" y="176" width="10" height="10" rx="2"/>
+      <rect x="774" y="174" width="12" height="12" rx="2"/>
+      <rect x="802" y="172" width="14" height="14" rx="2"/>
+      <rect x="832" y="178" width="10" height="10" rx="2"/>
+      <rect x="858" y="184" width="8" height="8" rx="2"/>
+      <rect x="735" y="202" width="10" height="10" rx="2"/>
+      <rect x="762" y="203" width="10" height="10" rx="2"/>
+      <rect x="790" y="199" width="13" height="13" rx="2"/>
+      <rect x="822" y="201" width="11" height="11" rx="2"/>
     </g>
   </g>
 
-  <g filter="url(#shadow)">
-    <text x="42" y="206" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" letter-spacing="-5" fill="url(#pwnPurple)">PWN</text>
-    <text x="441" y="206" font-family="Arial Black, Impact, sans-serif" font-size="82" font-weight="900" letter-spacing="-5" fill="url(#shaktiSilver)">SHAKTII</text>
+  <g filter="url(#typeShadow)">
+    <text x="70" y="326" font-family="Arial Black, Impact, sans-serif" font-size="88" font-weight="900" letter-spacing="-4" fill="url(#pwnText)">PWN</text>
+    <text x="430" y="326" font-family="Arial Black, Impact, sans-serif" font-size="88" font-weight="900" letter-spacing="-4" fill="url(#shaktiText)">SHAKTI</text>
   </g>
-
-  <text x="490" y="238" text-anchor="middle" font-family="Arial, sans-serif" font-size="18" font-weight="800" letter-spacing="10" fill="#6f35ff">PREDICT. PROTECT. PREVENT.</text>
-  <text x="490" y="257" text-anchor="middle" font-family="Arial, sans-serif" font-size="12" font-weight="700" letter-spacing="9" fill="#8d80c4">AI-POWERED CYBER DEFENSE</text>
 </svg>
