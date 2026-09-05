@@ -6,10 +6,9 @@ interface NavbarProps {
   setActiveNav: (nav: string) => void;
   onOpenDashboard?: () => void;
   onOpenPkap?: () => void;
-  onOpenResponse?: () => void;
 }
 
-export default function Navbar({ activeNav, setActiveNav, onOpenDashboard, onOpenPkap, onOpenResponse }: NavbarProps) {
+export default function Navbar({ activeNav, setActiveNav, onOpenDashboard, onOpenPkap }: NavbarProps) {
   return (
     <motion.header
       initial={{ y: -20, opacity: 0 }}
@@ -39,16 +38,13 @@ export default function Navbar({ activeNav, setActiveNav, onOpenDashboard, onOpe
         <motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.96 }} onClick={onOpenPkap} className="font-mono text-[11px] tracking-[0.08em] uppercase px-2.5 py-1 rounded-[4px] border border-[#6e557d]/60 text-[#cbb6d7] bg-[#6e557d]/10 hover:bg-[#6e557d]/30 transition-colors cursor-pointer">
           PKAP ANALYZER
         </motion.button>
-        <motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.96 }} onClick={onOpenResponse} className="font-mono text-[11px] tracking-[0.08em] uppercase px-2.5 py-1 rounded-[4px] border border-red-300/40 text-red-100 bg-red-500/10 hover:bg-red-500/20 transition-colors cursor-pointer">
-          RESPONSE APP
-        </motion.button>
         <motion.button whileHover={{ y: -1 }} whileTap={{ scale: 0.96 }} onClick={onOpenDashboard} className="font-mono text-[11px] tracking-[0.08em] uppercase px-2.5 py-1 rounded-[4px] border border-[#6e557d]/60 text-white bg-[#6e557d]/20 hover:bg-[#6e557d]/40 transition-colors cursor-pointer flex items-center gap-1.5">
           <span className="w-1.5 h-1.5 rounded-full bg-white animate-pulse" /><span>DASHBOARD</span>
         </motion.button>
       </nav>
 
-      <motion.button whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={onOpenResponse} className="bg-red-500/20 hover:bg-red-500/30 text-red-100 font-sans text-[13px] font-medium px-[18px] py-2 rounded-[6px] border border-red-300/20 transition-colors duration-200 shadow-[0_2px_8px_rgba(239,68,68,0.16)] cursor-pointer">
-        Response App
+      <motion.button whileHover={{ y: -2, scale: 1.02 }} whileTap={{ scale: 0.98 }} onClick={onOpenDashboard} className="bg-[#6e557d] hover:bg-[#7c608c] text-white font-sans text-[13px] font-medium px-[18px] py-2 rounded-[6px] border border-white/10 transition-colors duration-200 shadow-[0_2px_8px_rgba(110,85,125,0.25)] cursor-pointer">
+        Live Console
       </motion.button>
     </motion.header>
   );
