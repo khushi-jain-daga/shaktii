@@ -1,7 +1,7 @@
 import { Router } from 'express';
 import { z } from 'zod';
 import { prisma } from '../lib/prisma.js';
-import { requireAuth } from '../middleware/auth.js';
+import { requireAuth, requireRole } from '../middleware/auth.js';
 
 export const securityRouter = Router();
 securityRouter.use(requireAuth);
@@ -23,9 +23,7 @@ securityRouter.get('/overview', async (_req, res, next) => {
       prisma.securityEvent.count({ where: { severity: 'HIGH', status: 'OPEN' } }),
     ]);
     res.json({ success: true, data: { total, open, critical, high } });
-  } catch (error) {
-    next(error);
-  }
+  } catch (error) { next(error); }
 });
 
 securityRouter.get('/events', async (req, res, next) => {
@@ -33,30 +31,23 @@ securityRouter.get('/events', async (req, res, next) => {
     const severity = typeof req.query.severity === 'string' ? req.query.severity : undefined;
     const events = await prisma.securityEvent.findMany({
       where: severity && ['LOW', 'MEDIUM', 'HIGH', 'CRITICAL'].includes(severity) ? { severity: severity as 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL' } : undefined,
-      orderBy: { createdAt: 'desc' },
-      take: 200,
+      orderBy: { createdAt: 'desc' }, take: 200,
     });
     res.json({ success: true, data: events });
-  } catch (error) {
-    next(error);
-  }
+  } catch (error) { next(error); }
 });
 
-securityRouter.post('/events', async (req, res, next) => {
+securityRouter.post('/events', requireRole('ADMIN', 'SECURITY_ANALYST'), async (req, res, next) => {
   try {
-    const input = eventSchema.parse(req.body);
-    const event = await prisma.securityEvent.create({ data: input });
+    const event = await prisma.securityEvent.create({ data: eventSchema.parse(req.body) });
     res.status(201).json({ success: true, data: event });
-  } catch (error) {
-    next(error);
-  }
+  } catch (error) { next(error); }
 });
 
-securityRouter.patch('/events/:id/resolve', async (req, res, next) => {
+securityRouter.patch('/events/:id/resolve', requireRole('ADMIN', 'SECURITY_ANALYST'), async (req, res, next) => {
   try {
     const event = await prisma.securityEvent.update({ where: { id: req.params.id }, data: { status: 'RESOLVED' } });
+    await prisma.auditLog.create({ data: { userId: req.user!.sub, action: 'SECURITY_EVENT_RESOLVE', resource: event.id, status: 'SUCCESS' } });
     res.json({ success: true, data: event });
-  } catch (error) {
-    next(error);
-  }
+  } catch (error) { next(error); }
 });
