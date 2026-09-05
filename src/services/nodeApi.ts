@@ -25,6 +25,43 @@ export type SecureFile = {
   status: 'UPLOADED' | 'ENCRYPTED' | 'VERIFIED' | 'TAMPERED';
   createdAt: string;
 };
+export type BlockchainRecord = {
+  id: string;
+  transactionId: string;
+  network: string;
+  fileHash: string;
+  verified: boolean;
+  createdAt: string;
+  file?: { originalName: string; status: string };
+};
+export type SecurityEvent = {
+  id: string;
+  type: string;
+  severity: 'LOW' | 'MEDIUM' | 'HIGH' | 'CRITICAL';
+  description: string;
+  resource?: string;
+  ipAddress?: string;
+  status: string;
+  createdAt: string;
+};
+export type AuditLog = {
+  id: string;
+  action: string;
+  resource?: string;
+  status: string;
+  createdAt: string;
+};
+export type AnalyticsOverview = {
+  summary: {
+    files: number;
+    verifiedFiles: number;
+    tamperedFiles: number;
+    blockchainRecords: number;
+    audits: number;
+    securityEvents: number;
+  };
+  timeline: Array<{ day: string; activity: number; success: number; failed: number }>;
+};
 
 export const nodeApi = {
   async login(email: string, password: string) {
@@ -46,4 +83,12 @@ export const nodeApi = {
   },
   encrypt: (id: string) => request<SecureFile>(`/files/${id}/encrypt`, { method: 'POST' }),
   verify: (id: string) => request<{ valid: boolean; storedHash: string; currentHash: string }>(`/files/${id}/verify`, { method: 'POST' }),
+  blockchainRecords: () => request<BlockchainRecord[]>('/blockchain'),
+  registerBlockchain: (fileId: string) => request<BlockchainRecord>(`/blockchain/register/${fileId}`, { method: 'POST' }),
+  verifyBlockchain: (id: string) => request<BlockchainRecord>(`/blockchain/verify/${id}`, { method: 'POST' }),
+  securityOverview: () => request<{ total: number; open: number; critical: number; high: number }>('/security/overview'),
+  securityEvents: () => request<SecurityEvent[]>('/security/events'),
+  resolveSecurityEvent: (id: string) => request<SecurityEvent>(`/security/events/${id}/resolve`, { method: 'PATCH' }),
+  analyticsOverview: () => request<AnalyticsOverview>('/analytics/overview'),
+  auditLogs: () => request<AuditLog[]>('/analytics/audit-logs'),
 };
