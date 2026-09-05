@@ -1,3 +1,4 @@
+import path from 'node:path';
 import cors from 'cors';
 import express from 'express';
 import helmet from 'helmet';
@@ -31,7 +32,14 @@ app.use('/api/reports', reportsRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/pkap', legacyPkapRouter);
 
-app.use((_req, res) => res.status(404).json({ success: false, code: 'NOT_FOUND', message: 'API route not found' }));
+app.use('/api', (_req, res) => res.status(404).json({ success: false, code: 'NOT_FOUND', message: 'API route not found' }));
+
+if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(process.cwd(), 'dist');
+  app.use(express.static(clientDist));
+  app.get(/^(?!\/api\/).*/, (_req, res) => res.sendFile(path.join(clientDist, 'index.html')));
+}
+
 app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
   console.error(error);
   if (error instanceof Error && error.name === 'ZodError') return res.status(422).json({ success: false, code: 'VALIDATION_ERROR', message: 'Invalid request data' });
