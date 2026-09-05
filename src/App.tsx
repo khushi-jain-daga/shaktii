@@ -5,6 +5,7 @@ import Dashboard from './components/Dashboard/Dashboard';
 import PkapAnalyzerShell from './components/PkapAnalyzer/PkapAnalyzerShell';
 import AppShell from './components/AppShell';
 import LoginPage from './pages/LoginPage';
+import RegisterPage from './pages/RegisterPage';
 import FilesPage from './pages/FilesPage';
 import UploadPage from './pages/UploadPage';
 import BlockchainPage from './pages/BlockchainPage';
@@ -30,6 +31,7 @@ export default function App() {
   return <BrowserRouter><Routes>
     <Route path="/" element={<PublicLanding />} />
     <Route path="/login" element={<LoginPage />} />
+    <Route path="/register" element={<RegisterPage />} />
     <Route element={<ProtectedShell />}>
       <Route path="/dashboard" element={<DashboardOverviewPage />} />
       <Route path="/network-console" element={<Dashboard onBack={() => { window.location.href = '/dashboard'; }} />} />
