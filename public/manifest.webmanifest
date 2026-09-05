@@ -1,0 +1,12 @@
+{
+  "name": "SHAKTII Security Operations",
+  "short_name": "SHAKTII",
+  "start_url": "/dashboard",
+  "display": "standalone",
+  "background_color": "#090b0f",
+  "theme_color": "#090b0f",
+  "description": "SHAKTII cybersecurity, file integrity and blockchain verification control center.",
+  "icons": [
+    { "src": "/pwn-shakti-logo.svg", "sizes": "any", "type": "image/svg+xml", "purpose": "any maskable" }
+  ]
+}

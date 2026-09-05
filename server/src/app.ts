@@ -1,0 +1,47 @@
+import path from 'node:path';
+import cors from 'cors';
+import express from 'express';
+import helmet from 'helmet';
+import rateLimit from 'express-rate-limit';
+import { healthRouter } from './routes/health.routes.js';
+import { dashboardRouter } from './routes/dashboard.routes.js';
+import { legacyPkapRouter } from './routes/legacy-pkap.routes.js';
+import { authRouter } from './routes/auth.routes.js';
+import { filesRouter } from './routes/files.routes.js';
+import { blockchainRouter } from './routes/blockchain.routes.js';
+import { securityRouter } from './routes/security.routes.js';
+import { analyticsRouter } from './routes/analytics.routes.js';
+import { reportsRouter } from './routes/reports.routes.js';
+
+export const app = express();
+
+app.disable('x-powered-by');
+app.use(helmet());
+app.use(cors({ origin: process.env.CLIENT_URL?.split(',').map((value) => value.trim()) ?? true, credentials: true }));
+app.use(rateLimit({ windowMs: 60_000, limit: 180, standardHeaders: 'draft-7', legacyHeaders: false }));
+app.use(express.json({ limit: '2mb' }));
+app.use(express.urlencoded({ extended: true, limit: '2mb' }));
+
+app.use('/api/health', healthRouter);
+app.use('/api/auth', authRouter);
+app.use('/api/files', filesRouter);
+app.use('/api/blockchain', blockchainRouter);
+app.use('/api/security', securityRouter);
+app.use('/api/analytics', analyticsRouter);
+app.use('/api/reports', reportsRouter);
+app.use('/api/dashboard', dashboardRouter);
+app.use('/api/pkap', legacyPkapRouter);
+
+app.use('/api', (_req, res) => res.status(404).json({ success: false, code: 'NOT_FOUND', message: 'API route not found' }));
+
+if (process.env.NODE_ENV === 'production') {
+  const clientDist = path.join(process.cwd(), 'dist');
+  app.use(express.static(clientDist));
+  app.get(/^(?!\/api\/).*/, (_req, res) => res.sendFile(path.join(clientDist, 'index.html')));
+}
+
+app.use((error: unknown, _req: express.Request, res: express.Response, _next: express.NextFunction) => {
+  console.error(error);
+  if (error instanceof Error && error.name === 'ZodError') return res.status(422).json({ success: false, code: 'VALIDATION_ERROR', message: 'Invalid request data' });
+  res.status(500).json({ success: false, code: 'INTERNAL_SERVER_ERROR', message: 'An unexpected server error occurred' });
+});

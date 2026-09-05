@@ -1,189 +1,168 @@
-# SHAKTII – Autonomous Digital Defense Platform
+# SHAKTII — Full-Stack Security Operations Platform
 
-SHAKTII is an AI-powered cybersecurity interface with an integrated **PKAP Analyzer** workspace for raw log ingestion, threat detection, incident reporting, threat intelligence, investigation, and response workflows.
+SHAKTII is now a routed full-stack cybersecurity application built with **React + Node.js + Express + TypeScript + PostgreSQL + Prisma**. The original PKAP and WIDRS-X integrations are preserved while file security, blockchain-style verification, analytics, security events, audit logs, reports, authentication, PWA support, and multi-page navigation are handled by the Node application.
 
-> Built for a professional assignment/demo workflow: clean Vite frontend, SHAKTII-native UI, serverless PKAP APIs, and Vercel-ready deployment.
+## Stack
 
-## Live Demo
+- React 19 + TypeScript + Vite
+- React Router
+- Node.js + Express 5 + TypeScript
+- PostgreSQL + Prisma
+- JWT access tokens + rotating refresh tokens
+- bcrypt password hashing
+- Multer uploads
+- SHA-256 file fingerprints
+- AES-256-GCM file encryption
+- Recharts analytics
+- Helmet, CORS, rate limiting, Zod validation
+- PWA manifest + service worker
 
-```text
-https://shaktii.vercel.app
-```
+## Main Routes
 
-## Repository
+- `/login` and `/register`
+- `/dashboard`
+- `/files`
+- `/upload`
+- `/blockchain`
+- `/security`
+- `/analytics`
+- `/activity`
+- `/reports`
+- `/pkap`
+- `/network-console`
 
-```text
-https://github.com/khushi-jain-daga/shaktii
-```
+## Node API
 
-## Key Modules
+- `/api/auth/*`
+- `/api/dashboard`
+- `/api/files/*`
+- `/api/blockchain/*`
+- `/api/security/*`
+- `/api/analytics/*`
+- `/api/reports/*`
+- `/api/pkap/*`
+- `/api/health`
 
-- **SHAKTII Landing Page** – dark-grid product interface with security positioning.
-- **Live Security Dashboard** – operational telemetry and defense overview.
-- **PKAP Upload Center** – upload or paste `.log`, `.txt`, `.json`, and `.csv` data.
-- **Report Dashboard** – risk score, severity breakdown, findings, IOCs, and remediation.
-- **Reports History** – local report storage, reopen, and delete workflows.
-- **Threat Intelligence** – IOC search, enrichment cards, activity graph, and threat tables.
-- **Documentation** – product usage and workflow guidance inside the app.
-- **Settings** – local behavior, compliance, notifications, and cleanup preferences.
-- **Serverless APIs** – analysis, investigation, report generation, threat intel, and containment endpoints.
+## Local Setup
 
-## Feature Highlights
-
-- Client-side sensitive-data redaction before analysis
-- Deterministic local fallback analysis
-- Optional AI enrichment flow for deeper investigation
-- VirusTotal-style threat-intelligence enrichment fallback
-- MITRE ATT&CK style tags and investigation context
-- IOC extraction from raw logs
-- Responsive report and threat-activity graphs
-- Markdown report export and sharing actions
-- Local containment/blocklist workflow placeholder
-- Vercel deployment support through `api/` serverless functions
-
-## Tech Stack
-
-| Layer | Technology |
-| --- | --- |
-| Frontend | React 19, TypeScript, Vite |
-| Styling | Tailwind CSS, custom SHAKTII design system |
-| Motion | Framer Motion / Motion |
-| Charts | Recharts |
-| Icons | Lucide React |
-| APIs | Vercel Serverless Functions |
-| Deployment | Vercel |
-
-## Project Structure
-
-```text
-shaktii/
-├── api/                         # Vercel serverless API routes
-│   ├── pkap-analyze.js
-│   ├── pkap-block-ip.js
-│   ├── pkap-generate-report.js
-│   ├── pkap-investigate.js
-│   └── pkap-threat-intel.js
-│
-├── docs/                        # Technical and handoff documentation
-│   ├── API.md
-│   ├── ARCHITECTURE.md
-│   ├── FEATURES.md
-│   └── SETUP.md
-│
-├── public/
-│   └── screenshots/             # Add demo screenshots here
-│       └── README.md
-│
-├── src/
-│   ├── components/
-│   │   ├── Dashboard/           # SHAKTII live dashboard
-│   │   ├── PkapAnalyzer/        # PKAP Analyzer workspace pages
-│   │   ├── LandingPage.tsx
-│   │   └── Navbar.tsx
-│   │
-│   ├── utils/
-│   │   └── pkapAnalyzer.ts      # Local analysis, redaction, helpers
-│   │
-│   ├── App.tsx
-│   ├── index.css
-│   ├── main.tsx
-│   └── vite-env.d.ts
-│
-├── .env.example.pkap            # Example environment variables
-├── .gitignore
-├── package.json
-├── tsconfig.app.json
-├── tsconfig.json
-├── tsconfig.node.json
-├── vercel.json
-└── vite.config.ts
-```
-
-## Local Development
+1. Install Node.js 22+ and PostgreSQL.
+2. Install dependencies:
 
 ```bash
 npm install
+```
+
+3. Copy the full-stack environment template:
+
+```bash
+cp .env.example .env
+```
+
+4. Update `DATABASE_URL`, `JWT_SECRET`, `JWT_REFRESH_SECRET`, and `ENCRYPTION_KEY` in `.env`.
+
+5. Generate Prisma client and apply the migration:
+
+```bash
+npm run db:generate
+npm run db:deploy
+```
+
+6. Optional: seed local demo users and events:
+
+```bash
+npm run db:seed
+```
+
+The development seed creates:
+
+- `admin@shaktii.local` — ADMIN
+- `analyst@shaktii.local` — SECURITY_ANALYST
+- `user@shaktii.local` — USER
+
+Set `SEED_PASSWORD` in `.env` to control the development password. Production seeding is blocked unless `ALLOW_PRODUCTION_SEED=true` is explicitly set.
+
+7. Start frontend and backend together:
+
+```bash
 npm run dev
 ```
 
-Open the local URL printed by Vite, normally:
+Frontend defaults to `http://localhost:5173`. Node API defaults to `http://localhost:4000/api`.
 
-```text
-http://localhost:5173
-```
+## Production
 
-## Production Build
+Build both frontend and server:
 
 ```bash
 npm run build
 ```
 
-## Environment Variables
-
-Copy the example file and add only the integrations you want to use:
+Apply production migrations:
 
 ```bash
-cp .env.example.pkap .env
+npm run db:deploy
 ```
 
-Never commit real API keys. The app can continue using local/fallback analysis when optional external providers are not configured.
-
-Example variables are documented in `.env.example.pkap`.
-
-## Vercel Deployment
-
-Import this repository into Vercel with:
-
-```text
-Framework Preset: Vite
-Build Command: npm run build
-Output Directory: dist
-```
-
-The `api/` directory is deployed as Vercel Functions alongside the frontend.
-
-## Suggested Screenshots
-
-Add these screenshots under `public/screenshots/` before final submission:
-
-```text
-homepage.png
-pkap-upload.png
-report-dashboard.png
-threat-intel.png
-settings.png
-```
-
-## Documentation
-
-- [Architecture](docs/ARCHITECTURE.md)
-- [Features](docs/FEATURES.md)
-- [Setup Guide](docs/SETUP.md)
-- [API Reference](docs/API.md)
-
-## Security Notes
-
-Do not commit:
-
-- `.env`
-- real API keys
-- private credentials
-- production logs containing sensitive data
-- personal tokens or secrets
-
-## Assignment Handoff
-
-For reviewers or teammates:
+Run the Node application:
 
 ```bash
-git clone https://github.com/khushi-jain-daga/shaktii.git
-cd shaktii
-npm install
+NODE_ENV=production npm start
+```
+
+In production, Express serves the built React SPA from `dist/` and handles `/api/*`, so the application can be deployed as one Node service.
+
+## Security Model
+
+- Passwords are hashed using bcrypt.
+- Access tokens are short-lived JWTs.
+- Refresh tokens are random, stored hashed in PostgreSQL, rotated on refresh, and revoked on logout.
+- Security-event mutation routes require `ADMIN` or `SECURITY_ANALYST` role.
+- Uploaded files receive generated server-side filenames.
+- Files are fingerprinted with SHA-256.
+- File encryption uses AES-256-GCM with IV and authentication tag metadata.
+- Sensitive secrets belong only in environment variables.
+- Production seeding is disabled by default.
+
+## Demo Workflow
+
+```text
+Register / Login
+→ Dashboard
+→ Upload File
+→ SHA-256 fingerprint
+→ AES-256-GCM encryption
+→ Integrity verification
+→ Blockchain record registration
+→ Blockchain verification
+→ Security monitoring
+→ Analytics
+→ Audit logs
+→ Reports / CSV export
+```
+
+## PWA Behavior
+
+The app includes a manifest and service worker. The Install App control appears only when the browser exposes an install prompt and the app is not already running in standalone mode. Once installed, the install control disappears. If the browser later exposes a fresh install prompt after uninstall, the state is reset correctly.
+
+## Existing Integrations Preserved
+
+The previous PKAP serverless capabilities and WIDRS-X client integration remain in the repository during migration. The dedicated Node routes and routed UI are the primary full-stack application architecture.
+
+## Useful Commands
+
+```bash
 npm run dev
+npm run build
+npm run start
+npm run lint
+npm run db:generate
+npm run db:migrate
+npm run db:deploy
+npm run db:push
+npm run db:seed
+npm run db:studio
 ```
 
-Then open the Vite local URL in the browser.
+## Branding
 
----
-
-Built as the **SHAKTII + PKAP Analyzer** security workspace.
+The application uses the repository brand assets under `public/pwn-shakti-logo.svg` and `public/pwn-shakti-main-logo.svg` for authenticated navigation, login/register surfaces, favicon, and PWA metadata.
