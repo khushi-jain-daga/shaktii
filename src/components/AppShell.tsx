@@ -1,11 +1,12 @@
 import { NavLink, Outlet, useNavigate } from 'react-router-dom';
-import { Activity, BarChart3, FileSearch, Files, LayoutDashboard, LogOut, ShieldCheck, UploadCloud } from 'lucide-react';
+import { Activity, BarChart3, Blocks, FileSearch, Files, LayoutDashboard, LogOut, ShieldCheck, UploadCloud } from 'lucide-react';
 import { nodeApi } from '../services/nodeApi';
 
 const navItems = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
   { to: '/files', label: 'Secure Files', icon: Files },
   { to: '/upload', label: 'Upload & Secure', icon: UploadCloud },
+  { to: '/blockchain', label: 'Blockchain', icon: Blocks },
   { to: '/pkap', label: 'PKAP Analyzer', icon: FileSearch },
   { to: '/security', label: 'Security', icon: ShieldCheck },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
