@@ -8,7 +8,10 @@ export default function ReportsPage() {
 
   async function downloadCsv() {
     try {
-      const response = await fetch(nodeApi.reportCsvUrl(), { headers: nodeApi.authHeader() });
+      const headers = new Headers();
+      const token = window.localStorage.getItem('shaktii_token');
+      if (token) headers.set('Authorization', `Bearer ${token}`);
+      const response = await fetch(nodeApi.reportCsvUrl(), { headers });
       if (!response.ok) throw new Error('Unable to export report');
       const blob = await response.blob();
       const url = URL.createObjectURL(blob);
