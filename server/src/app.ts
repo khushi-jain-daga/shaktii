@@ -7,6 +7,9 @@ import { dashboardRouter } from './routes/dashboard.routes.js';
 import { legacyPkapRouter } from './routes/legacy-pkap.routes.js';
 import { authRouter } from './routes/auth.routes.js';
 import { filesRouter } from './routes/files.routes.js';
+import { blockchainRouter } from './routes/blockchain.routes.js';
+import { securityRouter } from './routes/security.routes.js';
+import { analyticsRouter } from './routes/analytics.routes.js';
 
 export const app = express();
 
@@ -32,6 +35,9 @@ app.use(express.urlencoded({ extended: true, limit: '2mb' }));
 app.use('/api/health', healthRouter);
 app.use('/api/auth', authRouter);
 app.use('/api/files', filesRouter);
+app.use('/api/blockchain', blockchainRouter);
+app.use('/api/security', securityRouter);
+app.use('/api/analytics', analyticsRouter);
 app.use('/api/dashboard', dashboardRouter);
 app.use('/api/pkap', legacyPkapRouter);
 
