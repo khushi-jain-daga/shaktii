@@ -5,6 +5,9 @@ import Dashboard from './components/Dashboard/Dashboard';
 import PkapAnalyzerShell from './components/PkapAnalyzer/PkapAnalyzerShell';
 import AppShell from './components/AppShell';
 import ComingSoonPage from './pages/ComingSoonPage';
+import LoginPage from './pages/LoginPage';
+import FilesPage from './pages/FilesPage';
+import UploadPage from './pages/UploadPage';
 
 function PublicLanding() {
   return (
@@ -23,13 +26,21 @@ function PublicLanding() {
   );
 }
 
+function ProtectedShell() {
+  const authenticated = Boolean(window.localStorage.getItem('shaktii_token'));
+  return authenticated ? <AppShell /> : <Navigate to="/login" replace />;
+}
+
 export default function App() {
   return (
     <BrowserRouter>
       <Routes>
         <Route path="/" element={<PublicLanding />} />
-        <Route element={<AppShell />}>
+        <Route path="/login" element={<LoginPage />} />
+        <Route element={<ProtectedShell />}>
           <Route path="/dashboard" element={<Dashboard onBack={() => { window.location.href = '/'; }} />} />
+          <Route path="/files" element={<FilesPage />} />
+          <Route path="/upload" element={<UploadPage />} />
           <Route
             path="/pkap"
             element={
