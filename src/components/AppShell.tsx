@@ -1,8 +1,11 @@
-import { NavLink, Outlet } from 'react-router-dom';
-import { Activity, BarChart3, FileSearch, LayoutDashboard, ShieldCheck } from 'lucide-react';
+import { NavLink, Outlet, useNavigate } from 'react-router-dom';
+import { Activity, BarChart3, FileSearch, Files, LayoutDashboard, LogOut, ShieldCheck, UploadCloud } from 'lucide-react';
+import { nodeApi } from '../services/nodeApi';
 
 const navItems = [
   { to: '/dashboard', label: 'Dashboard', icon: LayoutDashboard },
+  { to: '/files', label: 'Secure Files', icon: Files },
+  { to: '/upload', label: 'Upload & Secure', icon: UploadCloud },
   { to: '/pkap', label: 'PKAP Analyzer', icon: FileSearch },
   { to: '/security', label: 'Security', icon: ShieldCheck },
   { to: '/analytics', label: 'Analytics', icon: BarChart3 },
@@ -10,6 +13,7 @@ const navItems = [
 ];
 
 export default function AppShell() {
+  const navigate = useNavigate();
   return (
     <div className="min-h-screen bg-[#090b0f] text-white flex">
       <aside className="hidden lg:flex w-64 shrink-0 border-r border-white/10 bg-[#0f1218] p-4 flex-col">
@@ -17,7 +21,7 @@ export default function AppShell() {
           <div className="text-xs uppercase tracking-[0.24em] text-emerald-400">SHAKTII</div>
           <div className="mt-1 text-sm text-white/60">Security Operations</div>
         </div>
-        <nav className="space-y-1">
+        <nav className="space-y-1 flex-1">
           {navItems.map(({ to, label, icon: Icon }) => (
             <NavLink
               key={to}
@@ -33,6 +37,12 @@ export default function AppShell() {
             </NavLink>
           ))}
         </nav>
+        <button
+          onClick={() => { nodeApi.logout(); navigate('/login'); }}
+          className="mt-4 flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/50 hover:bg-white/5 hover:text-white"
+        >
+          <LogOut size={17} /> Logout
+        </button>
       </aside>
 
       <div className="min-w-0 flex-1">
