@@ -22,7 +22,7 @@ async function request<T>(path: string, init: RequestInit = {}, retry = true): P
   if (!(init.body instanceof FormData)) headers.set('Content-Type', 'application/json');
   const auth = accessToken();
   if (auth) headers.set('Authorization', `Bearer ${auth}`);
-  let response = await fetch(`${API_URL}${path}`, { ...init, headers });
+  const response = await fetch(`${API_URL}${path}`, { ...init, headers });
   if (response.status === 401 && retry && await refreshAccessToken()) return request<T>(path, init, false);
   const body = await response.json().catch(() => ({}));
   if (!response.ok) throw new Error(body.message || `Request failed (${response.status})`);
@@ -38,13 +38,16 @@ export type AnalyticsOverview = { summary: { files: number; verifiedFiles: numbe
 export type DashboardSummary = { protectedFiles: number; verifiedFiles: number; failedVerifications: number; activeUsers: number; securityAlerts: number; criticalAlerts: number; blockchainRecords: number; recentActivity: AuditLog[] };
 export type ReportSummary = { generatedAt: string; files: number; verified: number; tampered: number; blockchain: number; security: number; audits: number };
 
+type SessionData = { token: string; refreshToken: string; user: User };
+function persistSession(data: SessionData) {
+  saveTokens(data.token, data.refreshToken);
+  window.localStorage.setItem('shaktii_user', JSON.stringify(data.user));
+  return data;
+}
+
 export const nodeApi = {
-  async login(email: string, password: string) {
-    const data = await request<{ token: string; refreshToken: string; user: User }>('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) });
-    saveTokens(data.token, data.refreshToken);
-    window.localStorage.setItem('shaktii_user', JSON.stringify(data.user));
-    return data;
-  },
+  login: async (email: string, password: string) => persistSession(await request<SessionData>('/auth/login', { method: 'POST', body: JSON.stringify({ email, password }) })),
+  register: async (name: string, email: string, password: string) => persistSession(await request<SessionData>('/auth/register', { method: 'POST', body: JSON.stringify({ name, email, password }) })),
   logout() {
     const refresh = refreshToken();
     if (refresh) void fetch(`${API_URL}/auth/logout`, { method: 'POST', headers: { 'Content-Type': 'application/json' }, body: JSON.stringify({ refreshToken: refresh }) });
@@ -52,9 +55,7 @@ export const nodeApi = {
     window.localStorage.removeItem('shaktii_refresh_token');
     window.localStorage.removeItem('shaktii_user');
   },
-  currentUser(): User | null {
-    try { return JSON.parse(window.localStorage.getItem('shaktii_user') || 'null') as User | null; } catch { return null; }
-  },
+  currentUser(): User | null { try { return JSON.parse(window.localStorage.getItem('shaktii_user') || 'null') as User | null; } catch { return null; } },
   me: () => request<User>('/auth/me'),
   dashboard: () => request<DashboardSummary>('/dashboard'),
   files: () => request<SecureFile[]>('/files'),
