@@ -2,13 +2,26 @@
 <html lang="en">
   <head>
     <meta charset="UTF-8" />
-    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-    <meta name="theme-color" content="#0a0b0d" />
-    <meta name="description" content="SHAKTII autonomous digital defense and PKAP Analyzer security analysis workspace." />
-    <title>SHAKTII — Autonomous Digital Defense</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0, viewport-fit=cover" />
+    <meta name="theme-color" content="#6d28d9" />
+    <meta name="description" content="PWN SHAKTI edge router firmware monitoring and mobile incident response app." />
+    <meta name="mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-capable" content="yes" />
+    <meta name="apple-mobile-web-app-title" content="PWN SHAKTI" />
+    <meta name="apple-mobile-web-app-status-bar-style" content="black-translucent" />
+    <link rel="manifest" href="/manifest.webmanifest" />
+    <link rel="icon" type="image/svg+xml" href="/pwn-shakti-main-logo.svg" />
+    <title>PWN SHAKTI — Edge Cyber Defense</title>
   </head>
   <body>
     <div id="root"></div>
     <script type="module" src="/src/main.tsx"></script>
+    <script>
+      if ('serviceWorker' in navigator) {
+        window.addEventListener('load', () => {
+          navigator.serviceWorker.register('/sw.js').catch(() => undefined);
+        });
+      }
+    </script>
   </body>
 </html>
