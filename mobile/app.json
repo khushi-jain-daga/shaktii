@@ -1,0 +1,27 @@
+{
+  "expo": {
+    "name": "SHAKTII",
+    "slug": "shaktii-mobile",
+    "version": "1.0.0",
+    "orientation": "portrait",
+    "userInterfaceStyle": "dark",
+    "scheme": "shaktii",
+    "android": {
+      "package": "com.shaktii.defense"
+    },
+    "ios": {
+      "bundleIdentifier": "com.shaktii.defense",
+      "supportsTablet": true
+    },
+    "plugins": [
+      "expo-document-picker",
+      [
+        "expo-file-system",
+        {
+          "supportsOpeningDocumentsInPlace": true,
+          "enableFileSharing": true
+        }
+      ]
+    ]
+  }
+}
