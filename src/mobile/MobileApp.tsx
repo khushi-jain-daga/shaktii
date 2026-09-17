@@ -249,8 +249,9 @@ export default function MobileApp() {
           settings={settings}
           onChange={setSettings}
           onResetData={() => {
-            localStorage.removeItem('pkap_reports');
-            localStorage.removeItem('pkap_last_report');
+            localStorage.removeItem('pkap_history');
+            localStorage.removeItem('pkap_analysis_data');
+            localStorage.removeItem('pkap_settings');
           }}
         />
         <BottomNav active={view} onChange={setView} />
